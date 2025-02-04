@@ -19,7 +19,7 @@ jobs:
 
       # Step 2: Code Review with SonarQube
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v1.0
+        uses: SonarSource/sonarqube-scan-action@v2.0
         with:
           projectBaseDir: './'
         env:
