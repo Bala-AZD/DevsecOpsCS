@@ -70,7 +70,7 @@ jobs:
             # Run the new container
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
 
-# Notify on failure using Telegram (Optional)
+# Notify on failure using Telegram (Optonal)
 # # notify_failure:
 #    runs-on: ubuntu-latest
   #  #steps:
