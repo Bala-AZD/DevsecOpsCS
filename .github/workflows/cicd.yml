@@ -61,6 +61,7 @@ jobs:
           host: ${{ secrets.UBUNTU_VM_IP }}
           username: ${{ secrets.UBUNTU_VM_USER }}
           password: ${{ secrets.UBUNTU_VM_PASSWORD }}
+          port: 22
         
           script: |
             # Stop the existing container if it's running
