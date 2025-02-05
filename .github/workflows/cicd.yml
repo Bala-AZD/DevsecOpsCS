@@ -56,7 +56,7 @@ jobs:
         #  kubectl rollout status deployment/my-app-deployment
 
       - name: SSH into Ubuntu VM and Deploy Docker
-        uses: appleboy/ssh-action@0.1.7
+        uses: appleboy/ssh-action@v0.1.3
         with:
           host: ${{ secrets.UBUNTU_VM_IP }}
           username: ${{ secrets.UBUNTU_VM_USER }}
