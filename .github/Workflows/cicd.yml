@@ -19,11 +19,13 @@ jobs:
 
       # Step 2: Code Review with SonarQube
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v1.0
+        uses: SonarSource/sonarqube-scan-action@v2.0
         with:
           projectBaseDir: './'
         env:
+          SONAR_HOST_URL: https://sonarcloud.io
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_PROJECT_KEY: bala-azd
 
       # Step 3: Docker Login
       - name: Docker Login
