@@ -83,7 +83,7 @@ jobs:
             kubectl rollout status deployment/my-app-deployment
 
 # Notify on failure using Telegram (Optonal)
-# # notify_failure:
+#  notify_failure:
 #    runs-on: ubuntu-latest
   #  #steps:
     #  - name: Send Telegram Notification on Failure
