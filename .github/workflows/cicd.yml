@@ -94,11 +94,11 @@ jobs:
            #script: |
       - name: Ensure container is stopped and removed properly
         run: |
-          if [ "$(docker ps -q -f name=my-app)" ]; then
-              echo "Stopping and removing the existing container..."
-              docker stop my-app
-              docker rm my-app
-            fi
+          #if [ "$(docker ps -q -f name=my-app)" ]; then
+            #  echo "Stopping and removing the existing container..."
+            #  docker stop my-app
+            #  docker rm my-app
+           # fi
 
             # Remove the container if it's stopped but not removed
             if [ "$(docker ps -aq -f name=my-app)" ]; then
