@@ -44,11 +44,11 @@ jobs:
 
     steps:
       # Step 5: Docker Login
-      - name: Docker Login
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      #- name: Docker Login
+       # run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Pull Docker Image
-        run: docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
+      #- name: Pull Docker Image
+      #  run: docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
 
       # Step 6: SSH into Ubuntu VM and Deploy Docker
       
