@@ -51,30 +51,32 @@ jobs:
         run: docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
 
       # Step 6: SSH into Ubuntu VM and Deploy Docker
-      - name: SSH into Ubuntu VM and Deploy Docker
-        uses: appleboy/ssh-action@v0.1.3
-        with:
-          host: ${{ secrets.UBUNTU_VM_IP }}
-          username: ${{ secrets.UBUNTU_VM_USER }}
-          password: ${{ secrets.UBUNTU_VM_PASSWORD }}
-          port: 22
+      
+      #- name: SSH into Ubuntu VM and Deploy Docker
+       # uses: appleboy/ssh-action@v0.1.3
+       # with:
+         # host: ${{ secrets.UBUNTU_VM_IP }}
+          #username: ${{ secrets.UBUNTU_VM_USER }}
+         # password: ${{ secrets.UBUNTU_VM_PASSWORD }}
+         # port: 22
         
-          script: |
+         # script: |
             # Ensure container is stopped and removed properly
-            if [ "$(docker ps -q -f name=my-app)" ]; then
-              echo "Stopping and removing the existing container..."
-              docker stop my-app
-              docker rm my-app
-            fi
+            #if [ "$(docker ps -q -f name=my-app)" ]; then
+              #echo "Stopping and removing the existing container..."
+              #docker stop my-app
+              #docker rm my-app
+            #fi
 
             # Remove the container if it's stopped but not removed
-            if [ "$(docker ps -aq -f name=my-app)" ]; then
-              echo "Removing the existing container..."
-              docker rm my-app
-            fi
+           # if [ "$(docker ps -aq -f name=my-app)" ]; then
+            #  echo "Removing the existing container..."
+            #  docker rm my-app
+            #fi
 
             # Run the new container
-            docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
+            #docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }} 
+            
 
       # Step 7: SSH into EC2 and Deploy to Kubernetes
       - name: SSH into EC2 and Deploy to Kubernetes
