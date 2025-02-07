@@ -110,7 +110,7 @@ jobs:
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
             echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
             kubectl apply -f deployment.yaml --dry-run=client
-            kubectl apply -f deployment.yaml 
+            kubectl apply -f deployment.yaml --validate=false
             kubectl rollout status deployment/my-app-deployment
 
 
