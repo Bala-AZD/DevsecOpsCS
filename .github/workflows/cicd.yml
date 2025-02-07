@@ -85,6 +85,21 @@ jobs:
           password: ${{ secrets.EC2_PASSWORD }}
           port: 22
           script: |
+            # Ensure container is stopped and removed properly
+            if [ "$(docker ps -q -f name=my-app)" ]; then
+              echo "Stopping and removing the existing container..."
+              docker stop my-app
+              docker rm my-app
+            fi
+
+            # Remove the container if it's stopped but not removed
+            if [ "$(docker ps -aq -f name=my-app)" ]; then
+              echo "Removing the existing container..."
+              docker rm my-app
+            fi
+
+            # Run the new container
+            docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
             echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
             kubectl apply -f deployment.yaml --dry-run=client
             kubectl apply -f deployment.yaml 
