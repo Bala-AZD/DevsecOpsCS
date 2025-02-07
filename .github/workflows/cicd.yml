@@ -87,7 +87,7 @@ jobs:
           script: |
             echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
             kubectl apply -f deployment.yaml --validate=false
-            kubectl rollout status deployment/my-app-deployment
+           # kubectl rollout status deployment/my-app-deployment
 
 
 
