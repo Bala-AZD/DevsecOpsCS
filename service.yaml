@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+spec:
+  selector:
+    app: my-app # This should match the label in your Deployment to link the service with your pods.
+  ports:
+    - protocol: TCP
+      port: 80        # Port exposed by the service
+      targetPort: 80  # Port on which the application is running inside the container
+      nodePort: 30080 # Port exposed on all nodes for external access
+  type: NodePort      # This exposes the service to the external network through the node's IP and port
