@@ -92,8 +92,8 @@ jobs:
       - name: Pull Docker Image
         run: docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }} 
            #script: |
-      - name: Ensure container is stopped and removed properly
-        run: |
+      #- name: Ensure container is stopped and removed properly
+       # run: |
           #if [ "$(docker ps -q -f name=my-app)" ]; then
             #  echo "Stopping and removing the existing container..."
             #  docker stop my-app
@@ -101,10 +101,10 @@ jobs:
            # fi
 
             # Remove the container if it's stopped but not removed
-            if [ "$(docker ps -aq -f name=my-app)" ]; then
-              echo "Removing the existing container..."
-              docker rm my-app
-            fi
+           # if [ "$(docker ps -aq -f name=my-app)" ]; then
+              #echo "Removing the existing container..."
+              #docker rm my-app
+           # fi
              script: |
             ## Run the new container
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
