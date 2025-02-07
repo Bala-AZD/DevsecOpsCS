@@ -23,7 +23,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-app-service
+  name: my-app-deployment
 spec:
   type: NodePort  # Use LoadBalancer if using a managed cloud service like AWS EKS
   ports:
