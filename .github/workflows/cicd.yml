@@ -74,7 +74,7 @@ jobs:
             # Run the new container
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
 
-            # Apply Kubernetes Manifest
+            ## Apply Kubernetes Manifest
             echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
             kubectl apply -f deployment.yaml --dry-run=client
             kubectl apply -f deployment.yaml --validate=false
