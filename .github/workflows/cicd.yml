@@ -75,11 +75,11 @@ jobs:
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
 
             # Apply Kubernetes Manifest
-            echo "${{ secrets.KUBERNETES_MANIFEST }}" > /tmp/tempo/deployment.yaml
+            echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
       - name: Apply Kubernetes Manifest
          #echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
         run: |
-          kubectl apply -f /tmp/tempo/deployment.yaml --validate=false
+          kubectl apply -f deployment.yaml --validate=false
           kubectl rollout status deployment/my-app-deployment
             #kubectl apply -f deployment.yaml --dry-run=client
             #kubectl apply -f deployment.yaml --validate=false
