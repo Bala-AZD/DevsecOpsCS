@@ -79,7 +79,7 @@ jobs:
       - name: Apply Kubernetes Manifest
          echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
         run: |
-          kubectl apply -f deployment.yaml --validate=false
+          kubectl apply -f /tmp/tempo/deployment.yaml --validate=false
           kubectl rollout status deployment/my-app-deployment
             #kubectl apply -f deployment.yaml --dry-run=client
             #kubectl apply -f deployment.yaml --validate=false
