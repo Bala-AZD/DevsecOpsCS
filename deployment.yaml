@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: <YOUR_DOCKER_USERNAME>/my-app:latest
+        image: tejaswiambula/my-app:latest
         ports:
         - containerPort: 80
 ---
