@@ -75,11 +75,11 @@ jobs:
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
 
             # Apply Kubernetes Manifest
-            echo "${{ secrets.KUBERNETES_MANIFEST }}" > /cicd/deployment.yaml
+            #echo "${{ secrets.KUBERNETES_MANIFEST }}" > /cicd/deployment.yaml
       - name: Apply Kubernetes Manifest
-         #echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
         run: |
-          echo "Current working directory: $(pwd)"
+          echo "${{ secrets.KUBERNETES_MANIFEST }}" > /cicd/deployment.yaml
+          #echo "Current working directory: $(pwd)"
           kubectl apply -f ./cicd/deployment.yaml --validate=false
           kubectl rollout status deployment/my-app-deployment
             #kubectl apply -f deployment.yaml --dry-run=client
