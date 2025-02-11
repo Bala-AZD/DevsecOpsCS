@@ -75,7 +75,7 @@ jobs:
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
             #mkdir -p /home/ec2-user/cicd
             # Apply Kubernetes Manifest
-            #echo "${{ secrets.KUBERNETES_MANIFEST }}" > /home/ec2-user/deployment.yaml
+            ##echo "${{ secrets.KUBERNETES_MANIFEST }}" > /home/ec2-user/deployment.yaml
           
             kubectl apply -f /home/ec2-user/deployment.yaml --validate=false
             kubectl rollout status deployment/my-app-deployment
