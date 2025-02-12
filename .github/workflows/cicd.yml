@@ -43,7 +43,6 @@ jobs:
     needs: build
 
     steps:
-      # Step 5: Docker Login on EC2
       - name: SSH into EC2 and Deploy to Kubernetes
         uses: appleboy/ssh-action@v0.1.3
         with:
@@ -73,15 +72,14 @@ jobs:
 
             # Run the new container
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
-            - name: Set up Kubeconfig
-              run: |
-             echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
-             chmod 600 $HOME/.kube/config
-            # Apply Kubernetes Manifest
-            echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
-            
-            kubectl apply -f deployment.yaml --validate=false
-            kubectl rollout status deployment/my-app-deployment
-            #kubectl apply -f deployment.yaml --dry-run=client
-            #kubectl apply -f deployment.yaml --validate=false
-            #kubectl rollout status deployment/my-app-deployment
+
+      - name: Set up Kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+
+      - name: Apply Kubernetes Manifest
+        run: |
+          echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
+          kubectl apply -f deployment.yaml --validate=false
+          kubectl rollout status deployment/my-app-deployment
