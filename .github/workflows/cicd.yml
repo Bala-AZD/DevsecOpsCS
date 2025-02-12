@@ -73,14 +73,13 @@ jobs:
 
             # Run the new container
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
-            #mkdir -p /home/ec2-user/cicd
+            - name: Set up Kubeconfig
+              run: |
+             echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
+             chmod 600 $HOME/.kube/config
             # Apply Kubernetes Manifest
-            ##echo "${{ secrets.KUBERNETES_MANIFEST }}" > /home/ec2-user/deployment.yaml
-            sudo apt update
-            sudo apt install curl -y
-            sudo curl -LO "https://dl.k8s.io/release/v1.28.4/bin/linux/amd64/kubectl"
-            sudo chmod +x kubectl
-            sudo mv kubectl /usr/local/bin/
+            echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
+            
             kubectl apply -f deployment.yaml --validate=false
             kubectl rollout status deployment/my-app-deployment
             #kubectl apply -f deployment.yaml --dry-run=client
