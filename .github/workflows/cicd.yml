@@ -74,7 +74,8 @@ jobs:
             # Run the new container
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
       - name: Set up Kubeconfig
-        run: |      
+        run: |
+         HOME=/home/ec2-user
          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
          chmod 600 $HOME/.kube/config
           echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
