@@ -77,7 +77,7 @@ jobs:
             # Apply Kubernetes Manifest
             ##echo "${{ secrets.KUBERNETES_MANIFEST }}" > /home/ec2-user/deployment.yaml
           
-            kubectl apply -f /home/ec2-user/deployment.yaml --validate=false
+            kubectl apply -f deployment.yaml --validate=false
             kubectl rollout status deployment/my-app-deployment
             #kubectl apply -f deployment.yaml --dry-run=client
             #kubectl apply -f deployment.yaml --validate=false
