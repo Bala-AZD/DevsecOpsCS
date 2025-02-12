@@ -76,7 +76,11 @@ jobs:
             #mkdir -p /home/ec2-user/cicd
             # Apply Kubernetes Manifest
             ##echo "${{ secrets.KUBERNETES_MANIFEST }}" > /home/ec2-user/deployment.yaml
-          
+            sudo apt update
+            sudo apt install curl -y
+            sudo curl -LO "https://dl.k8s.io/release/v1.28.4/bin/linux/amd64/kubectl"
+            sudo chmod +x kubectl
+            sudo mv kubectl /usr/local/bin/
             kubectl apply -f deployment.yaml --validate=false
             kubectl rollout status deployment/my-app-deployment
             #kubectl apply -f deployment.yaml --dry-run=client
