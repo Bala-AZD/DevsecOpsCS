@@ -78,9 +78,9 @@ jobs:
           HOME=/home/ec2-user
           sudo mkdir -p $HOME/.kube
           #chown -R ec2-user:ec2-user $HOME/.kube/
-          chmod 700 $HOME/.kube
+          sudo chmod 700 $HOME/.kube
           echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
-          chmod 600 $HOME/.kube/config
+          sudo chmod 600 $HOME/.kube/config
           echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
           kubectl apply -f deployment.yaml --validate=false
           kubectl rollout status deployment/my-app-deployment
