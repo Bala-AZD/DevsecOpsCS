@@ -54,23 +54,19 @@ jobs:
           script: |
             # Docker Login
             echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
             # Pull Docker Image
             docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }} 
-
             # Ensure container is stopped and removed properly
             if [ "$(docker ps -q -f name=my-app)" ]; then
               echo "Stopping and removing the existing container..."
               docker stop my-app
               docker rm my-app
             fi
-
             # Remove the container if it's stopped but not removed
             if [ "$(docker ps -aq -f name=my-app)" ]; then
               echo "Removing the existing container..."
               docker rm my-app
             fi
-
             # Run the new container
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
       - name: Set up Kubeconfig
@@ -78,10 +74,9 @@ jobs:
           HOME=/home/ec2-user
           sudo mkdir -p $HOME/.kube
           #chown -R ec2-user:ec2-user $HOME/.kube/
-          sudo chmod -R 777 $HOME/.kube
-          #sudo chmod -R 777 $HOME/.minikube
+          sudo chmod 700 $HOME/.kube
           echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
-          sudo chmod 777 $HOME/.kube/config
+          sudo chmod 775 $HOME/.kube/config
           echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
           kubectl apply -f deployment.yaml --validate=false
           kubectl rollout status deployment/my-app-deployment
