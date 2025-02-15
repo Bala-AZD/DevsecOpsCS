@@ -71,12 +71,12 @@ jobs:
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
       - name: Set up Kubeconfig
         run: |
-          HOME=/home/ec2-user
-          sudo mkdir -p $HOME/.kube
-          sudo chown -R $user:$user $HOME/.kube/
-          sudo chmod -R 700 $HOME/.kube
-          sudo echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
-          sudo chmod 600 $HOME/.kube/config
+          #HOME=/home/ec2-user
+          #sudo mkdir -p $HOME/.kube
+          #sudo chown -R $user:$user $HOME/.kube/
+          #sudo chmod -R 700 $HOME/.kube
+          sudo echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > /home/config
+          sudo chmod 600 /home/config
           echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
           kubectl apply -f deployment.yaml --validate=false
           kubectl rollout status deployment/my-app-deployment
