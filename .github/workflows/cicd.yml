@@ -75,8 +75,10 @@ jobs:
           #sudo mkdir -p $HOME/.kube
           #sudo chown -R $user:$user $HOME/.kube/
           #sudo chmod -R 700 $HOME/.kube
-          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > /tmp/config
-          sudo chmod 600 /tmp/config
+          sudo mkdir -p /tmp/.kube
+          sudo chmod -R 700 /tmp/.kube
+          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > /tmp/.kube/config
+          sudo chmod 600 /tmp/.kube/config
           echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
           kubectl apply -f deployment.yaml --validate=false
           kubectl rollout status deployment/my-app-deployment
