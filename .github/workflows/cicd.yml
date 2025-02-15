@@ -75,9 +75,10 @@ jobs:
           #sudo mkdir -p $HOME/.kube
           #sudo chown -R $user:$user $HOME/.kube/
           #sudo chmod -R 700 $HOME/.kube
-          echo "$user"
+          #echo "$user"
           sudo mkdir -p /tmp/.kube
           sudo chmod -R 700 /tmp/.kube
+          sudo chown $USER:$USER /tmp/.kube
           #echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > /tmp/.kube/config
           echo "***base64-encoded-kubeconfig***" | base64 --decode > /tmp/.kube/config
           sudo chmod 600 /tmp/.kube/config
