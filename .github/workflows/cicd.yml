@@ -80,6 +80,7 @@ jobs:
           #chown -R ec2-user:ec2-user $HOME/.kube/
           sudo chmod -R 777 $HOME/.kube
           sudo echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
+          sudo chmod -R 777 $HOME/.minikube
           sudo chmod 777 $HOME/.kube/config
           echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
           kubectl apply -f deployment.yaml --validate=false
