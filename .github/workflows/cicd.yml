@@ -74,12 +74,12 @@ jobs:
       run: |
         # Create the .kube directory and set permissions
         sudo mkdir -p /home/ec2-user/.kube
-        sudo chown -R $USER:$USER /home/ec2-user/.kube
+        sudo chown $USER:$USER /home/ec2-user/.kube
         
         # Decode kubeconfig from GitHub secret and set correct permissions
         echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > /home/ec2-user/.kube/config
         sudo chmod 600 /home/ec2-user/.kube/config
-        sudo chown ec2-user:ec2-user /home/ec2-user/.kube/config
+        sudo chown $USER:$USER /home/ec2-user/.kube/config
         
         # Set KUBECONFIG environment variable
         export KUBECONFIG=/home/ec2-user/.kube/config
