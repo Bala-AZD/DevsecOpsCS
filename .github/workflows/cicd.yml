@@ -74,7 +74,7 @@ jobs:
           HOME=/home/ec2-user
           sudo mkdir -p $HOME/.kube
           sudo chown -R $user:$user $HOME/.kube/
-          sudo chmod 700 $HOME/.kube
+          sudo chmod -R 700 $HOME/.kube
           sudo echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
           sudo chmod 600 $HOME/.kube/config
           echo "${{ secrets.KUBERNETES_MANIFEST }}" > deployment.yaml
